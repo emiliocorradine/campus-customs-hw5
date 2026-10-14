@@ -522,3 +522,34 @@ Problem 10: Reflection. Put the text from reflection_draft.md (in homework 5/) i
 **What was lacking after the first prompt:**
 
 <!-- TODO: fill in -->
+
+## Problem 11 — Submit to GitHub
+**Prompt:**
+
+````
+Problem 11: Submit to GitHub. Work only in homework 5/. If this prompt doesn't end with "END OF PROMPT", stop and tell me.
+
+1. Make sure .gitignore excludes .env (and .env.* except .env.example), node_modules/, frontend/dist/, __pycache__/, .venv/, *.tsbuildinfo, but NOT the two .db files. Search all files to be committed for my Portkey key value and stop if it appears.
+2. Write README.md at the root: a short summary (Campus Customs, 5 agents, MCP server, FastAPI, React board), then the steps:
+   a. pip install -r requirements.txt; copy .env.example to .env and add your PORTKEY_API_KEY
+   b. For a clean run, copy data/campus_customs.db over data/campus_customs_new.db (or POST /reset)
+   c. The MCP server (python mcp_server/server.py) starts with the backend; .mcp.json registers it for Claude Code
+   d. Backend: cd backend → uvicorn main:app --reload --port 8000
+   e. Board: cd frontend → npm install → npm run dev → open http://localhost:5173
+   f. Reset the DB before a full 101 → 102 → 103 run; approve slips on the board
+   g. One line for each output/ file
+3. Create a PUBLIC GitHub repo named campus-customs-hw5 with gh (if gh isn't logged in, stop and tell me). Commit everything, including BOTH .db files, and push.
+4. Put the repo URL in output/github_url.txt, then commit and push.
+5. Clone it into a temp folder and confirm .env is NOT there and both .db files ARE there. Delete the clone.
+6. Add this prompt to AI_prompts.md as "## Problem 11 — Submit to GitHub", verbatim, then commit and push again.
+Show me the repo URL.
+END OF PROMPT
+````
+
+**Follow-up prompt (if needed):**
+
+<!-- TODO: fill in -->
+
+**What was lacking after the first prompt:**
+
+<!-- TODO: fill in -->
