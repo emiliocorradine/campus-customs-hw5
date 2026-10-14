@@ -1,0 +1,154 @@
+{
+  "shop_date": "2026-08-31",
+  "starting_balance": 3400.0,
+  "total_paid": 3256.0,
+  "ending_balance": 144.0,
+  "cash_check": "3400.00 - 3256.00 = 144.00 (matches cash_accounts)",
+  "tickets": [
+    {
+      "id": 101,
+      "final_status": "resolved",
+      "closed_by": "human (update_ticket_status)",
+      "closing_note": "Closed by human after 3 runs: invoice paid, tee ordered, customer draft saved.",
+      "runs": [
+        {
+          "run_id": "88e53b494fc5",
+          "result": "token limit (64,815 > 60,000)"
+        },
+        {
+          "run_id": "95b1ed629b89",
+          "result": "awaiting_approval"
+        },
+        {
+          "run_id": "5f72df7bbc41",
+          "result": "request limit (30)"
+        }
+      ],
+      "outcome": "Invoice 501 ($840) paid to unblock Bulldog Print Co, then 1 × CC-TEE-WHITE S ordered for $8 (arrives ~2026-09-05). The same tee was ordered twice (duplicate $8 PO). Customer drafts #1-#3 saved, none sent. The agents did the work but never marked it resolved.",
+      "agents": {
+        "boss": "Routed to Stock Desk, then Treasury and Client Relations; set awaiting_approval; pulled Real Estate in for ticket 102's rent on every run; hit the token limit (run 1) and the request limit (run 3).",
+        "inventory": "check_stock → 0 on hand, short 1; vendor 1 blocked by invoice 501 (run 1); after payment, request_purchase_order for 1 tee ($8) in run 2 and again in run 3 (duplicate).",
+        "accounting": "get_invoice(501) → $840, 3 days overdue; request_payment for invoice 501 (slip #1); in run 3 also requested ticket 102's rent (slip #4).",
+        "facilities": "Not needed for 101, but called on every run to check lease 1 ($2,400 due 2026-09-02) for ticket 102.",
+        "customer_service": "Drafts #1, #2, #3 to Tauhid Zaman: out of stock, restock pending, no promised date."
+      },
+      "human_approvals": [
+        {
+          "request_id": 1,
+          "kind": "invoice_payment",
+          "amount": 840.0,
+          "approved_by": "Emilio",
+          "status": "approved",
+          "requested_by": "accounting",
+          "requested_for_ticket": 101,
+          "payment_id": 1,
+          "cash_moved": 840.0
+        },
+        {
+          "request_id": 2,
+          "kind": "purchase_order",
+          "amount": 8.0,
+          "approved_by": "Emilio",
+          "status": "executed",
+          "requested_by": "inventory",
+          "requested_for_ticket": 101,
+          "payment_id": 2,
+          "cash_moved": 8.0
+        },
+        {
+          "request_id": 3,
+          "kind": "purchase_order",
+          "amount": 8.0,
+          "approved_by": "Emilio",
+          "status": "executed",
+          "requested_by": "inventory",
+          "requested_for_ticket": 101,
+          "payment_id": 3,
+          "cash_moved": 8.0,
+          "note": "duplicate of request #2"
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "final_status": "resolved",
+      "closed_by": "human (update_ticket_status)",
+      "closing_note": "Closed by human: rent already paid as payment #4 during 101's run.",
+      "runs": [
+        {
+          "run_id": "46df133b62d4",
+          "result": "escalate_to_human (status in_progress)"
+        }
+      ],
+      "outcome": "Rent for lease 1 ($2,400) was paid as payment #4, requested during ticket 101's run 3; lease next_due moved to 2026-10-02. 102's own run made no slip; it saw the new due date as a conflict with the email and drafted a clarification to the landlord (draft #4).",
+      "agents": {
+        "boss": "Called Real Estate and Treasury in parallel, then Client Relations; set in_progress and escalated to a human.",
+        "facilities": "get_lease_status(1) → $2,400, next due 2026-10-02 (not_due); flagged the conflict with the 'due in 2 days' email.",
+        "accounting": "get_cash_balance → $144; no pending rent request; couldn't see the rent amount (no lease tool).",
+        "customer_service": "Draft #4 to Elm City Properties asking to confirm the due date.",
+        "inventory": "Not called."
+      },
+      "human_approvals": [
+        {
+          "request_id": 4,
+          "kind": "rent_payment",
+          "amount": 2400.0,
+          "approved_by": "Emilio",
+          "status": "approved",
+          "requested_by": "accounting",
+          "requested_for_ticket": 102,
+          "payment_id": 4,
+          "cash_moved": 2400.0,
+          "note": "requested by Treasury during ticket 101's run 3, for ticket 102"
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "final_status": "resolved",
+      "closed_by": "human (update_ticket_status)",
+      "closing_note": "Closed by human after 2 runs: discount approved as slip #5 (20 × $52.20) and again as overlapping slip #6 (8 × $52.20); 8 in stock, the 12-unit restock ($264) didn't fit the $144 cash; customer drafts #5 and #6 saved.",
+      "runs": [
+        {
+          "run_id": "b86af3a9c651",
+          "result": "awaiting_approval"
+        },
+        {
+          "run_id": "01d11936e310",
+          "result": "awaiting_approval"
+        }
+      ],
+      "outcome": "8 of 20 hoodies in stock; a 10% bulk price of $52.20 (above the $22 cost) approved twice: for all 20 (slip #5) and again for 8 (slip #6, overlapping). The 12-unit restock PO ($264) was refused by the tool for lack of cash ($144). No cash moved. Drafts #5 and #6 to the club saved, none sent.",
+      "agents": {
+        "boss": "Called Stock Desk and Treasury (run 1, plus Real Estate about ticket 102), Treasury first in run 2; set awaiting_approval both runs.",
+        "inventory": "check_stock → 8 on hand, short 12; vendor 1 unblocked, 5-day lead; request_purchase_order for 12 refused: not enough cash ($264 vs $144).",
+        "accounting": "get_sku_pricing → cost $22, list $58; request_price_override 20 × $52.20 (slip #5, run 1) and 8 × $52.20 (slip #6, run 2); confirmed $144 cash, restock $120 short.",
+        "facilities": "Called in run 1 only, about ticket 102's lease (not needed for 103).",
+        "customer_service": "Drafts #5 and #6 to the Yale AI Club: 8 available at the pending price, the other 12 need a separate restock, no date."
+      },
+      "human_approvals": [
+        {
+          "request_id": 5,
+          "kind": "price_override",
+          "amount": 1044.0,
+          "approved_by": "Emilio",
+          "status": "approved",
+          "requested_by": "accounting",
+          "requested_for_ticket": 103,
+          "cash_moved": 0.0
+        },
+        {
+          "request_id": 6,
+          "kind": "price_override",
+          "amount": 417.6,
+          "approved_by": "EMlio",
+          "status": "approved",
+          "requested_by": "accounting",
+          "requested_for_ticket": 103,
+          "cash_moved": 0.0,
+          "note": "overlaps request #5; approver name stored as typed"
+        }
+      ]
+    }
+  ]
+}

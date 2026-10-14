@@ -1,0 +1,91 @@
+{
+  "server_name": "campus-customs",
+  "config_file": ".mcp.json",
+  "server_command": {
+    "command": "python",
+    "args": [
+      "mcp_server/server.py"
+    ],
+    "cwd": "homework 5/"
+  },
+  "transport": "stdio",
+  "database_path": "data/campus_customs_new.db",
+  "sha256_before": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+  "sha256_after": "23686a90d698f7fa6f901a3f0a9774db9cbb31e13151c9e5717275f3321f360a",
+  "db_unchanged": true,
+  "all_tests_match_db": true,
+  "tests": [
+    {
+      "ticket": 101,
+      "prompt": "Problem 4 (part B): Test the campus-customs MCP tools. Do everything yourself from this session; I am not restarting or opening anything.\n\n1. In AI_prompts.md, under Problem 4, replace the cut-off \"What was lacking\" sentence and its TODO with:\n   \"The first prompt was cut off mid-sentence, so fastmcp was never installed and the MCP server couldn't start.\"\n\n2. Record the SHA-256 of homework 5/data/campus_customs_new.db.\n\n3. Test the tools through a real MCP connection: write a temporary Python script that uses fastmcp's Client to start the server over stdio exactly as .mcp.json does (command \"python\", args [\"mcp_server/server.py\"], working directory homework 5/). Then call:\n   - check_stock(sku=\"CC-TEE-WHITE\", size=\"S\", qty_requested=1)  → ticket 101\n   - get_lease_status(lease_id=1)  → ticket 102\n   - get_sku_pricing(sku=\"CC-HOOD-NAVY\", qty=20)  → ticket 103\n   Do not import server.py or query SQLite directly. Put the script in a temp folder, NOT in homework 5/, and delete it when done.\n\n4. Check the outputs against the database:\n   - 101: qty_on_hand 0, shortfall 1\n   - 102: monthly_rent 2400, days_until_due 2, status \"due_soon\"\n   - 103: unit_cost 22, list_price 58, total_at_list 1160\n   If anything differs, fix the tool, not the data.\n\n5. Record the SHA-256 again. It must be unchanged.\n\n6. Save homework 5/output/mcp_smoke.json with: the server name, the config file, the database path, the hash before and after, and a \"tests\" list. Each test needs: the ticket number, this prompt, the tool name, the arguments, the exact tool output, and matches_db (true/false).\n\n7. Add this prompt to AI_prompts.md under Problem 4 as \"Follow-up prompt 2\", word for word.\n\nFinally, show me mcp_smoke.json.",
+      "tool": "check_stock",
+      "arguments": {
+        "sku": "CC-TEE-WHITE",
+        "size": "S",
+        "qty_requested": 1
+      },
+      "output": {
+        "sku": "CC-TEE-WHITE",
+        "name": "Classic Bulldog Tee",
+        "size": "S",
+        "qty_on_hand": 0,
+        "location": "Aisle B",
+        "qty_requested": 1,
+        "can_fulfill": false,
+        "shortfall": 1
+      },
+      "expected_from_db": {
+        "qty_on_hand": 0,
+        "shortfall": 1
+      },
+      "matches_db": true
+    },
+    {
+      "ticket": 102,
+      "prompt": "Problem 4 (part B): Test the campus-customs MCP tools. Do everything yourself from this session; I am not restarting or opening anything.\n\n1. In AI_prompts.md, under Problem 4, replace the cut-off \"What was lacking\" sentence and its TODO with:\n   \"The first prompt was cut off mid-sentence, so fastmcp was never installed and the MCP server couldn't start.\"\n\n2. Record the SHA-256 of homework 5/data/campus_customs_new.db.\n\n3. Test the tools through a real MCP connection: write a temporary Python script that uses fastmcp's Client to start the server over stdio exactly as .mcp.json does (command \"python\", args [\"mcp_server/server.py\"], working directory homework 5/). Then call:\n   - check_stock(sku=\"CC-TEE-WHITE\", size=\"S\", qty_requested=1)  → ticket 101\n   - get_lease_status(lease_id=1)  → ticket 102\n   - get_sku_pricing(sku=\"CC-HOOD-NAVY\", qty=20)  → ticket 103\n   Do not import server.py or query SQLite directly. Put the script in a temp folder, NOT in homework 5/, and delete it when done.\n\n4. Check the outputs against the database:\n   - 101: qty_on_hand 0, shortfall 1\n   - 102: monthly_rent 2400, days_until_due 2, status \"due_soon\"\n   - 103: unit_cost 22, list_price 58, total_at_list 1160\n   If anything differs, fix the tool, not the data.\n\n5. Record the SHA-256 again. It must be unchanged.\n\n6. Save homework 5/output/mcp_smoke.json with: the server name, the config file, the database path, the hash before and after, and a \"tests\" list. Each test needs: the ticket number, this prompt, the tool name, the arguments, the exact tool output, and matches_db (true/false).\n\n7. Add this prompt to AI_prompts.md under Problem 4 as \"Follow-up prompt 2\", word for word.\n\nFinally, show me mcp_smoke.json.",
+      "tool": "get_lease_status",
+      "arguments": {
+        "lease_id": 1
+      },
+      "output": {
+        "id": 1,
+        "space_name": "Chapel Street shop",
+        "landlord": "Elm City Properties",
+        "monthly_rent": 2400.0,
+        "next_due": "2026-09-02",
+        "date_today": "2026-08-31",
+        "days_until_due": 2,
+        "status": "due_soon"
+      },
+      "expected_from_db": {
+        "monthly_rent": 2400,
+        "days_until_due": 2,
+        "status": "due_soon"
+      },
+      "matches_db": true
+    },
+    {
+      "ticket": 103,
+      "prompt": "Problem 4 (part B): Test the campus-customs MCP tools. Do everything yourself from this session; I am not restarting or opening anything.\n\n1. In AI_prompts.md, under Problem 4, replace the cut-off \"What was lacking\" sentence and its TODO with:\n   \"The first prompt was cut off mid-sentence, so fastmcp was never installed and the MCP server couldn't start.\"\n\n2. Record the SHA-256 of homework 5/data/campus_customs_new.db.\n\n3. Test the tools through a real MCP connection: write a temporary Python script that uses fastmcp's Client to start the server over stdio exactly as .mcp.json does (command \"python\", args [\"mcp_server/server.py\"], working directory homework 5/). Then call:\n   - check_stock(sku=\"CC-TEE-WHITE\", size=\"S\", qty_requested=1)  → ticket 101\n   - get_lease_status(lease_id=1)  → ticket 102\n   - get_sku_pricing(sku=\"CC-HOOD-NAVY\", qty=20)  → ticket 103\n   Do not import server.py or query SQLite directly. Put the script in a temp folder, NOT in homework 5/, and delete it when done.\n\n4. Check the outputs against the database:\n   - 101: qty_on_hand 0, shortfall 1\n   - 102: monthly_rent 2400, days_until_due 2, status \"due_soon\"\n   - 103: unit_cost 22, list_price 58, total_at_list 1160\n   If anything differs, fix the tool, not the data.\n\n5. Record the SHA-256 again. It must be unchanged.\n\n6. Save homework 5/output/mcp_smoke.json with: the server name, the config file, the database path, the hash before and after, and a \"tests\" list. Each test needs: the ticket number, this prompt, the tool name, the arguments, the exact tool output, and matches_db (true/false).\n\n7. Add this prompt to AI_prompts.md under Problem 4 as \"Follow-up prompt 2\", word for word.\n\nFinally, show me mcp_smoke.json.",
+      "tool": "get_sku_pricing",
+      "arguments": {
+        "sku": "CC-HOOD-NAVY",
+        "qty": 20
+      },
+      "output": {
+        "sku": "CC-HOOD-NAVY",
+        "unit_cost": 22.0,
+        "list_price": 58.0,
+        "qty": 20,
+        "total_at_list": 1160.0,
+        "margin_pct_at_list": 62.07
+      },
+      "expected_from_db": {
+        "unit_cost": 22,
+        "list_price": 58,
+        "total_at_list": 1160
+      },
+      "matches_db": true
+    }
+  ]
+}
